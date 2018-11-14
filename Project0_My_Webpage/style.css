@@ -1,0 +1,84 @@
+
+h1,figcaption,th{
+	text-align: center;
+}
+
+div,p{
+	margin: 20px;
+}
+
+h3{
+	margin-left: 30px;
+}
+
+div,table {
+	padding: 10px;
+}
+
+p,li{
+	color: gray;
+}
+
+table {
+	border: 2px solid black;
+	border-collapse: collapse;
+	border-color: black;
+	text-align: left;
+}
+
+th,td {
+	border: 1px solid black;
+}
+
+th {
+	background-color: lightgray;
+}
+
+
+p::selection{
+	color: red;
+	background-color: yellow;
+}
+
+.row {
+	margin: 20px
+	padding: 20px;
+}
+.row > div{
+	padding: 20px;
+    background-color: teal;
+    border: 2px solid black;
+}
+
+
+.alert{
+	margin: 20px;
+}
+
+
+.nav-pills{
+	padding: 20px;
+	align-items: center;
+}
+
+[role=presentation]{
+	padding: 20px;
+	align-content: center;
+}
+
+.presentation{
+	padding: 20px;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.btn.btn-default.btn-lg{
+	margin: 10px
+}
+
+

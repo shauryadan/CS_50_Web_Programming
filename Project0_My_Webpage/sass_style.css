@@ -1,0 +1,17 @@
+h1, h2, h3, h4, h5, h6 {
+  color: black;
+  margin-left: 30px; }
+
+figcaption {
+  color: black; }
+
+table {
+  color: black;
+  margin: 20px; }
+
+ul {
+  margin: 15px; }
+  ul li {
+    color: #7f8691; }
+
+/*# sourceMappingURL=sass_style.css.map */
