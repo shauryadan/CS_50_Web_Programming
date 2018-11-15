@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Get Me Home Report</title>
+	<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="sass_style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">x
+</head>
+<body>
+	<h1>Get Me Home - Project Report</h1>
+	<h3>1. Abstract</h3>
+	<p>
+		The main idea behind this project was to successfully design an application that is able to send and receive directions to the user's desired location via SMS text message. Additionally, the application was able to read audible voice directions directions to the user and successfully redirect the user in case they missed a turn or got lost.
+	</p>
+
+	<h3>2. Introduction and Motivation</h3>
+	
+		<ol>
+			<li>The main motivation behind this project was to use the wireless technologies of SMS and GPS to obtain driving directions in areas of limited WiFi and Cellular Data connectivity.</li>
+
+			<li>Cellular Data, even when available, is more expensive and less reliable com- pared to SMS, especially in rural areas and outside the United States.</li>
+
+			<li>Short messaging Service (SMS) is a text messaging service that allows users to send and receive messages through their mobile devices and applications. The reliability of SMS services makes it a preferable service for a critical task such as finding directions. Being lost in an unknown area can pose a large danger to drivers.</li>
+
+			<li>Global Positioning System (GPS) is a global navigation satellite system that uses geolocation and time estimations via satellites to provide directions to the receiver. This wireless technology, which is not dependent on Internet connectivity, can be used to locate the coordinates of the user and to draw out a route for the user to provide directions via SMS with the help of a server.</li>
+		</ol>
+	
+
+	<h3>3. Functionalities</h3>
+	<h5>3.1 Expected</h5>
+	<ol>
+		<li>User sends a request to the server for directions through an SMS containing the destination address and GPS location.</li>
+		<li>The server will access the Google Maps Directions API and retrieve the full directions.</li>
+		<li>The retrieved directions will be parsed to extract the instructions of the direc- tions and the appropriate coordinates of the legs of the trip.</li>
+		<li>The parsed directions will be encoded and compiled into a series of text mes- sages with headers added by the server to be sent back to the user. The headers ensure that the user application can correctly parse the data sent by the server.</li>
+		<li>The user application will then parse the data into directions and organize a trip for the user.</li>
+		<li>Directions will be spoken with audio to the users once they come within a certain distance to a turn.</li>
+		<li>Users will have option to request for directions again if they get lost again or if they miss a turn.</li>
+
+	</ol>
+
+	<h5>3.2 Accomplished</h5>
+	<p>
+		Upon complete implementation of the product, both the user and server applications fulfill all of the expected functionalities. With the current iteration of the product, the user can input a desired destination and be provided with step-by-step directions from his or her location to the destination without being connected to cellular data or WiFi.
+	</p>
+	<p>
+		
+		The only alteration to the expected functionalities is the use of another cellular device to act as a server. The use of a dedicated server with an SMS gateway (explained in wireless technologies section) was considered for this product, however the financial resources required for a gateway were not available at the time of implementation. Nonetheless, the substitution of a the SMS gateway with another cellular device not only functions as effectively, but possibly allows for the future implementation of a peer-to-peer network that can distribute directions without the need of a dedicated server. Additionally, the computations conducted by the server as a cellular device are identical to those that would have been conducted by a server.
+	</p>
+
+	<h3>4. Theoretical Background of Wireless Technologies Used</h3>
+	<h5>4.1 Short Message Service</h5>
+	<p>Short Message Service is a widely used mobile application that uses communication protocols to send and receive text messages. The early development of SMS took place in the GSM group and outlined the main components and functionalities of SMS. The two main components of SMS were defined to be Short Message Mobile Originated and Short Message Mobile Terminated. In SMS-MT, the message is sent via phone or an application by the network. In SMS-MO, the message is sent to a phone or application by the network.</p>
+	<h5>GSM</h5>
+	<p>GSM recommendation 03.40 and 03.41 defined Short Message Service - Point to Point and Short Message Mobile Originated - Point to Point respectively. First, the message is sent to Short Message Service Center (SMSC) that receives the message and forwards it to the concerned recipients. The SMSC has the capability to store and send the message again at a later time in case the message did not go through. Each text message has the possibility of not reaching its recipient. Each text message is independent of each other.</p>
+
+	<h5>Size of the Message</h5>
+	<p>The Mobile Application Part is responsible for handling the size of the text message sent. Text message size is controlled by default GSM alphabets that determine the size of the message based on the user's mobile handset configuration. However, the standard limit to the size of a message is 160 characters, and the implementation of the product took that into account.</p>
+
+	<h5>SMS gateway providers</h5>
+	<p>The gateway providers allow communication via SMS between mobile subscriber and corresponding operator. It allows the two way exchange of messages via the operator's SMSC and is called the local termination model.</p>
+	<p>The better gateway model acquires SS7 protocol in which the model is able to route the message from sender's to receiver's phone without the user of operator's SMSC. It is called the international termination model.</p>
+	<p>However, SMS gateway providers charge for use of their resources, and therefore due to the financial limitations of this project, a cellular device was successfully used as a substitute.</p>
+
+	<h5>4.2 Global Positioning System</h5>
+	<p>Global Positioning System (GPS) is a widely used global navigation system that uses global satellites geolocation system and time formats to provide directions to concerned users. It operates independently of any other communication system.</p>
+	<p>The location and position of GPS satellites along with their times is utilized to oper- ate the GPS network. GPS receivers on the ground are able to detect and recognize the exact time and location of satellites and use this information along with math- ematical algorithms and equations to find the directions and true time required to reach the desired location. More precisely the components that allow the GPS to function effectively are pseudorandom code time of transmission.</p>
+	<p>The pseudorandom code provides the receiver with the time of arrival of the satellite signal. The receiver also gets the time of transmission and location of the satellite. Using this information the receiver forms the time of flight and then converts the information into coordinates that allow the receiver to set up a navigation path.</p>
+	<p>Because GPS has become a standard feature on smartphones, the Get Me Home product can make use of it to send the location to the server and to read directions to the user at the appropriate locations.</p>
+
+	<h3>5. Implementation</h3>
+	<h5>5.1 Detailed Implementation of Components</h5>
+	<h5>User Application</h5>
+	<p>The user application of the project was implemented using the Android SDK and coded in Java. The application consisted of two activities supported by other classes. The first activity that shows up hen the application is opened in the "Main Activity," in which the application prompts the user's preferred destination to form a SMS re- quest to the server to obtain directions, as seen in Figure 3a. This activity prepares the SMS text of the directions request to the server by including a header identifying a request, the destination address, and the user's GPS location at the time of the request, which is retrieved from a "LocationManager." The activity also contains a "SendSms" object that will handle the physical sending of the request to the server.</p>
+	<p>As soon as a request is sent, a "BroadcastReceiver" is turned on to intercept all text messages arriving at the user’s device. Upon the receipt of an appropriate response from the server, the application will take the user to the "Direction" activity, which handles the parsing of the server response and breaking the trip into a series of legs, each with a starting coordinate, an ending coordinate, and a verbal instruction. Immediately, the screen will change t display directions, as shown in Figure 3b, on which the current instruction and the next instruction are displayed. Additionally, a "text to speech" engine haversinesincluded in the activity audibly reads the instruction to the user to prevent the distraction of drivers on the road.</p>
+	<figure>
+          <img src="haversines.png" class="center">
+          <figcaption>Figure 1: Spherical triangle solved by the law of haversines. All distances must be calculated along the circumference of the sphere (great circle).
+			</figcaption>
+    </figure>
+    <p>The "Direction" activity also contains a "LocationManager" that will retrieve the GPS coordinates of the user upon every 5 meters of displacement, and compare them with the starting coordinates of the next leg. If the calculated distance be- tween both points is less than 50 meters, the directions on the screen would update and the updated instructions would be audibly read to the user/driver. The dis- tance between coordinates is calculated with the Haversine formula, to account for the fact that the earth is a sphere on which Cartesian distances would not apply, shown in Figure 1.</p>
+    <p>Additionally on the interface for the "Direction" Activity (Figure 3b), there is a Re- calculate button that should be used by the driver when he sways from directions. It would have been preferable that application detect when the user sways from his or her intended path, much like the "recalculate" functionality of Google Maps, but such a task requires map data to which Get Me Home does not have access to. The Recalculate button sends another request to the server with the same destination as the path the user was already on, but with an updated coordinate set. Upon receipt of the new direction set, the "Direction" Activity would restart.</p>
+	<p>When a user reaches his or her destination, the "Direction" activity ends and the user is taken back to the "MainActivity" Screen (Figure 3a), prompting the user for another destination.</p>
+
+	<h5>Server Application</h5>
+	<p>The user application of the project was also implemented using the Android SDK and coded in Java. However, this application does not have a user interface, because it has no need for one, and all processes run in the background of the phone. The server has only one activity, which contains a "BroadcastReceiver" that is turned on to intercept all text messages arriving at the server device. Upon the detection of an appropriate request header on a text message, the "BroadcastReceiver" class starts a new thread to handle the user request. The creation of threads allows the server to simultaneously both process requests from multiple users while being able to still accept new requests.</p>
+	<p>Each thread is responsible for fetching directions from the Google Maps Directions API with an HTTP GET request, which returns returns a JSON object containing data for the directions. The server is then responsible for parsing the JSON object, scraping the directions, and obtaining appropriate coordinates and instructions for each leg of the directions. Consequently, the directions are encoded such that they may be sent via SMS, while adhering to the common 160 character limit of SMS text messages. Consequently, it is possible for a request to have a multi-part response, as not add directions can fit into one SMS message.</p>
+	<p>The inherent flaw of SMS messages is that they are not necessarily received by the user in the same order that they were sent. To combat this limitation of SMS, a header is appended to the beginning of each part of the response, containing an index and total number of messages in the response. Therefore, the user application may use the information in headers to wait long enough for all parts of the response to arrive.</p>
+
+	<h5>Robustness of Communication</h5>
+	<p>As the product is dependent on SMS communication, which may be unreliable, the user application has a time-out of two minutes for each request. The two minute threshold was arbitrarily chosen as an appropriate waiting period, and in testing proved to be more than enough for a response; on average responses to a request take no more than 10 seconds.</p>
+	<p>Furthermore, the server is equipped with the ability to diagnose its own network connectivity, and if it deems itself unable of processing a request by a user, a NO SIGNAL response will be returned to the user.</p>
+	<p>Likewise, if the user makes an invalid request for directions, such as providing a non-existent destination, the server will respond with an INVALID response to the user application, so that the user may be notified of the bad request.</p>
+
+	<h3>5.2 Overview of Get Me Home App</h3>
+	<figure>
+          <img src="get_me_home_process.png" class="center">
+          <figcaption>Figure 2: Process in different stages
+			</figcaption>
+    </figure>
+
+    <h3>5.3 Summary: Process in different stages</h3>
+	<h6>Stage 1:</h6>
+	<p>User enters his/her GPS location and preferred destination address into the user application. The user application sends this information via SMS to the server application.</p>
+	<h6>Stage 2:</h6>
+	<p>The server application receives the user request for directions and fetches this data from the Google Maps Directions API via HTTP GET.</p>
+	<h6>Stage 3:</h6>
+	<p>The server application receives the directions and encodes these directions into a text message to be sent back to the user via SMS.</p>
+	<h6>Stage 4:</h6>
+	<p>The user application receives this data and parses the text message data into GPS directions and at last, the user is able to begin his/her journey towards a preferred destination without the availability of WiFi or cellular data.</p>
+
+	<h3>5.4 Display of User App</h3>
+	<div class="row" style="background-color: black; margin-bottom: 0px;">
+  		<div class="column" style="background-color:black">
+  			
+  				<img src="get_me_home_img2.png" style="width:100%; margin-left: 30px; margin-right: 20px;">
+  				<figcaption>(a) Request screen</figcaption>
+  			
+  		</div>
+  		<div class="column" style="background-color: black;">
+    		
+  				<img src="get_me_home_img3.png" style="width:100%; margin-left: 50px">
+  				<figcaption style="margin-left: 50px">(b) Directions screen</figcaption>
+  			
+  		</div>
+  	</div>
+  	<p style="text-align: center;margin-left: 30px;">Figure 3: Graphical User Interface of the User Application: 3(a) Request screen and 3(b) Directions Screen</p>
+
+  	<h3> 6. Project Results and Evaluation</h3>
+	<p>Our app was successfully able to provide directions to the user in the absence of wifi or cellular data and effectively redirected to the correct route in case the user got lost.</p>
+	<b style="color: white; margin-left: 20px">The app passed the following test stages successfully:</b>
+	<ol>
+	<li>Connection and communication between user application and server application.</li>
+	<li>Connection and communication between server application and Google Maps API.</li>
+	<li>Testing data transfer from user application to server application.</li>
+	<li>Testing data transfer from server application to Google Maps API using HTTP GET.</li>
+	<li>Testing data transfer from Google Maps API to server application.</li>
+	<li>Testing effective route generation using GPS and SMS at different locations that lack WiFi and cellular data connectivity.</li>
+</ol>
+
+	<h3>7. Future Work</h3>
+	<p>Upon the success of the initial iteration of the product, we are very excited at the potential of growth.</p>
+	<p>There are some simple additions that can be made, such as the ability to enter in unspecific points of interest (such as "gas station" or "restaurant") rather than a specific address. Currently, the server is already able to handle such a request, but it is merely a matter of updating the graphical user interface of the user application.</p>
+	<p>Additionally, upon implementation of the server on a cellular device instead of an SMS gateway, we realized that there is potential for the establishment of a peer-to- peer network in which requests are sent and received between users that are already on the network. For example, if there is a user who is connected to the Internet and is able to fetch Google Maps directions, it can act as the "server" for that particular request. The implementation would be an interesting networking problem to solve.</p>
+	</ol>
+
+	<h3>8. Conclusion</h3>
+	<p>After successfully testing the Get Me Home application for various scenarios and functionalities, we can conclude that it serves as a good alternative to all navigation applications that rely on WiFi and cellular data. The application handles all the scenarios in which the user might face a problem and also passed all the testing stages successfully. Therefore, the application serves as a feasible substitute for Google Maps in times of duress. With implementation of a peer-to-peer network, a dedicated server may be completely removed and replaced with other nodes in the network.</p>
+
+</body>
+</html>
