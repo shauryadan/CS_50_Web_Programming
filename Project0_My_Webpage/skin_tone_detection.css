@@ -1,0 +1,15 @@
+h1{
+	text-align: center;
+}
+.container{
+	color: black;
+	padding: 30px;
+}
+
+.top-buffer { margin-top: 30px; }
+
+.page_layout{
+	border: solid; 
+	border-color: #95afa7; 
+	margin:20px;
+}
